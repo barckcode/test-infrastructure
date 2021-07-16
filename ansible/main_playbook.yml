@@ -7,6 +7,7 @@
 # install_docker        - Install Docker and docker-compose for debian
 # install_jenkins       - Install Jenkins
 # install_mysql         - Install Percona Server for MySQL
+# install_waypoint      - Install Waypoint
 # nginx_vhosts          - Configure vhosts
 # ssh_rsa               - Copy SSH KEY RSA file
 # set_hostname          - Set a hostname
@@ -55,6 +56,10 @@
     - include: tasks/install_mysql.yml
       tags:
         - install_mysql
+
+    - include: tasks/install_waypoint.yml
+      tags:
+        - install_waypoint
 
     - include: tasks/nginx_vhosts.yml
       tags:

@@ -1,7 +1,7 @@
 ---
 - name: Create scripts directories
   file:
-    path: "/home/admin/scripts"
+    path: "/home/admin/deploy/{{ application }}/scripts/"
     owner: admin
     group: admin
     state: directory
@@ -10,9 +10,9 @@
 - name: Copy scripts with owner and permissions
   copy:
     src: "{{ item }}"
-    dest: "/home/admin/scripts/"
+    dest: "/home/admin/deploy/{{ application }}/scripts/"
     owner: admin
     group: admin
     mode: 0774
   with_fileglob:
-    - "/ansible/conf/sauron/scripts/deploy/*"
+    - "/ansible/conf/deploy/{{ application }}/scripts/*"
