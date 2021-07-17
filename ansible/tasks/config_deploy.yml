@@ -1,16 +1,8 @@
 ---
-- name: Create scripts directories
-  file:
-    path: "/home/admin/deploy/{{ application }}/scripts/"
-    owner: admin
-    group: admin
-    state: directory
-    mode: 0775
-
 - name: Copy scripts with owner and permissions
   copy:
     src: "{{ item }}"
-    dest: "/home/admin/deploy/{{ application }}/scripts/"
+    dest: "/home/admin/repository/{{ repository_dir }}/{{ application }}/deploy/"
     owner: admin
     group: admin
     mode: 0774
