@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  db_host:
+    container_name: db_blog
+    image: mysql/mysql-server:8.0
+    env_file:
+      - ./db.env
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${DB_PASSWORD}"
+    ports:
+      - 3333:3306
+    volumes:
+      - app_data:/var/lib/mysql
+    networks:
+      - net_app
+  blog_host:
+    container_name: blog_app
+    image: barckcode/flask_blog:v1.3
+    depends_on:
+      - db_host
+    command: flask run --host=0.0.0.0
+    volumes:
+      - ../../../app_blog/blog:/app
+    env_file:
+      - ./app.env
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    ports:
+      - 5000:5000
+    networks:
+      - net_app
+  api_blog_host:
+    container_name: blog_api
+    image: barckcode/api_blog:v0.1
+    depends_on:
+      - db_host
+    command: uvicorn app:app --reload
+    volumes:
+      - ../../../api_blog/api:/api
+    env_file:
+      - ./api.env
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    ports:
+      - 8000:8000
+    networks:
+      - net_app
+
+volumes:
+  app_data:
+
+networks:
+  net_app:
