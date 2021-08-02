@@ -35,3 +35,4 @@ symbolic_link_vhost:
 
 root_dir_vhost:
   - helmcode_com
+  - api_blog_helmcode_com
