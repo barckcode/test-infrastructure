@@ -32,6 +32,7 @@ symbolic_link_vhost:
   - rick-and-morty_helmcode_com.conf
   - weather_helmcode_com.conf
   - web-infographics_helmcode_com.conf
+  - api_blog_helmcode_com.conf
 
 root_dir_vhost:
   - helmcode_com
