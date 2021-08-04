@@ -18,6 +18,7 @@ www_users:
 list_additional_pkg:
   - git-all
   - nginx
+  - apache2-utils
 
 #####
 # Vhosts:
