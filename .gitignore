@@ -118,3 +118,4 @@ images
 **/jenkins_home/ansible/host_vars/*_private.yml
 **/jenkins_home/ansible/db
 **/jenkins_home/.ansible
+**/rollback/**
