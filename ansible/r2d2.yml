@@ -1,0 +1,11 @@
+---
+############################# TAGS FOR TASKS #############################
+# pullall               - Pull all repos of Sauron
+##########################################################################
+######################## Hosts:
+- hosts: sauron
+
+  tasks:
+    - include: tasks/pullall.yml
+      tags:
+        - pullall

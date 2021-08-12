@@ -1,0 +1,9 @@
+---
+- name: Pull All repos
+  become_user: admin
+  git:
+    repo: "git@github.com:helmcode/{{ item }}.git"
+    dest: "/home/admin/repository/{{ item }}"
+    version: main
+    accept_hostkey: yes
+  loop: "{{ list_apps }}"

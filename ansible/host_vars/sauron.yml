@@ -34,3 +34,13 @@ src_vhosts_path: /ansible/conf/sauron/vhosts
 
 symbolic_link_vhost:
   - ci_helmcode_com.conf
+
+
+#####
+# Applications:
+#####
+list_apps:
+  - infrastructure
+  - blog
+  - api_blog
+  - slack_bot
