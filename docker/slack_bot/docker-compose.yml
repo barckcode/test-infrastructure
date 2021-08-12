@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  ansible_host:
+    container_name: r2d2
+    image: barckcode/slack_bot:v1.0
+    command: python3 app.py
+    volumes:
+      - ../../../slack_bot/bolt_app:/app
+    env_file:
+      - ./.env
+    networks:
+      - net
+
+networks:
+  net:
