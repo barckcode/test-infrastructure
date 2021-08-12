@@ -23,6 +23,7 @@ ssh_key_path: /ansible/conf/private/ssh/aws_id_rsa
 list_additional_pkg:
   - git-all
   - nginx
+  - python3-venv
 
 
 #####
