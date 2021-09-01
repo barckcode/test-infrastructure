@@ -4,6 +4,9 @@
 *.pem
 *.key*
 
+### Postgres ###
+docker/postgres/db
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
