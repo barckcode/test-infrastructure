@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  api_salsa_db:
+    container_name: api_salsa_db
+    image: postgres:13
+    env_file:
+      - ./db.env
+    environment:
+      - "POSTGRES_PASSWORD=${DB_PASSWORD}"
+    ports:
+      - 5432:5432
+    volumes:
+      - api_salsa_data:/var/lib/postgresql/data
+    networks:
+      - api_salsa_net
+        #  api_salsa:
+        #    container_name: api_salsa
+        #    build:
+        #      context: ../../../api_salsa
+        #      dockerfile: Dockerfile
+        #    depends_on:
+        #      - api_salsa_db
+        #    command: uvicorn app:app --reload --host=0.0.0.0
+        #    volumes:
+        #      - ../../../api_salsa/api:/api
+        #    env_file:
+        #      - ./api.env
+        #    dns:
+        #      - 8.8.8.8
+        #      - 1.1.1.1
+        #    ports:
+        #      - 8000:8000
+        #    networks:
+        #      - api_salsa_net
+
+volumes:
+  api_salsa_data:
+
+networks:
+  api_salsa_net:
