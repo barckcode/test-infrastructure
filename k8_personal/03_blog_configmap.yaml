@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blog
+data:
+  test: "Esto es una prueba"
+  test_api: "Esto es una prueba para API"
