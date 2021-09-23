@@ -113,7 +113,7 @@ images
 *.tfstate.*
 
 
-# Ansible
+### Ansible ###
 **/private/**
 **/ansible/private
 **/ansible/.ansible
@@ -122,3 +122,7 @@ images
 **/jenkins_home/ansible/db
 **/jenkins_home/.ansible
 **/rollback/**
+
+
+### K8 ###
+k8_personal/*_secret.yaml

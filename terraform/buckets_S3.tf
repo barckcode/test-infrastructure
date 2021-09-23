@@ -40,4 +40,14 @@ resource "aws_s3_bucket" "source_code" {
     Name        = "source_code"
     Creation    = "terraform"
   }
+
+  lifecycle_rule {
+    abort_incomplete_multipart_upload_days = 0
+    enabled                                = true
+    id                                     = "DeleteOldFiles"
+    tags                                   = {}
+    noncurrent_version_expiration {
+      days = 3
+    }
+  }
 }

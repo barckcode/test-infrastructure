@@ -166,6 +166,14 @@ resource "aws_security_group" "mysql_sg" {
     cidr_blocks = ["10.0.1.0/24"]
   }
 
+  ingress {
+    description = "MYSQL from K8"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["174.138.101.216/32"]
+  }
+
   tags = {
     Name     = "mysql_sg"
     Creation = "terraform"
