@@ -171,7 +171,7 @@ resource "aws_security_group" "mysql_sg" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["174.138.101.216/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {

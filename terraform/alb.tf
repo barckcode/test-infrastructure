@@ -75,22 +75,22 @@ resource "aws_lb_target_group_attachment" "sauron" {
   port             = 80
 }
 
-# Webas
-resource "aws_lb_target_group" "webas_tg" {
-  name     		= "webas-tg"
-  port     		= 80
-  protocol 		= "HTTP"
-	protocol_version = "HTTP1"
-  vpc_id   		= aws_vpc.main.id
+# # Webas
+# resource "aws_lb_target_group" "webas_tg" {
+#   name     		= "webas-tg"
+#   port     		= 80
+#   protocol 		= "HTTP"
+# 	protocol_version = "HTTP1"
+#   vpc_id   		= aws_vpc.main.id
 
-	tags = {
-    Name     = "webas_tg"
-		Creation = "terraform"
-	}
-}
+# 	tags = {
+#     Name     = "webas_tg"
+# 		Creation = "terraform"
+# 	}
+# }
 
-resource "aws_lb_target_group_attachment" "webas" {
-  target_group_arn = aws_lb_target_group.webas_tg.arn
-  target_id        = aws_instance.web01.id
-  port             = 80
-}
+# resource "aws_lb_target_group_attachment" "webas" {
+#   target_group_arn = aws_lb_target_group.webas_tg.arn
+#   target_id        = aws_instance.web01.id
+#   port             = 80
+# }
