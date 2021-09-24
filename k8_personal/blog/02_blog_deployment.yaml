@@ -17,20 +17,57 @@ spec:
     spec:
       containers:
       - name: blog
-        image: nginx:1.14.2
+        image: barckcode/flask_blog:2.0
         ports:
-        - containerPort: 80
-        # env:
-        # - name: TEST
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       name: blog
-        #       key: test
-        # - name:  USER_TEST
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: blog
-        #       key: user_test
+        - containerPort: 5000
+        env:
+        # ConfigMap
+        - name: FLASK_APP
+          valueFrom:
+            configMapKeyRef:
+              name: blog
+              key: flask_app
+        - name:  FLASK_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: blog
+              key: flask_env
+        # SecretKey
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: db_host
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: db_database
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: db_user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: db_password
+        - name: SECRET_KEY_FORM
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: secret_key_form
+        - name: BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: bot_token
+        - name: CHAT_ID
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: chat_id
 
 
 ---
@@ -57,11 +94,6 @@ spec:
         ports:
         - containerPort: 8000
         env:
-        # - name: TEST_API
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       name: blog
-        #       key: test_api
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
@@ -95,7 +127,7 @@ metadata:
 spec:
   ports:
   - port:  80
-    targetPort:  80
+    targetPort:  5000
   selector:
     role: blog
 

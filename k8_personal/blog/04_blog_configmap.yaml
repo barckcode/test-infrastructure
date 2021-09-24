@@ -3,5 +3,6 @@ kind: ConfigMap
 metadata:
   name: blog
 data:
-  test: "Esto es una prueba"
-  test_api: "Esto es una prueba para API"
+  # Blog
+  flask_app: "main.py"
+  flask_env: "production"
