@@ -90,10 +90,17 @@ spec:
     spec:
       containers:
       - name: api-blog
-        image: barckcode/api_blog:1.0
+        image: barckcode/api_blog:2.0
         ports:
         - containerPort: 8000
         env:
+        # ConfigMap
+        - name: TOKEN_EXPIRATION
+          valueFrom:
+            configMapKeyRef:
+              name: blog
+              key: token_expiration
+        # SecretKey
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
@@ -114,6 +121,16 @@ spec:
             secretKeyRef:
               name: blog
               key: db_password
+        - name: TOKEN_SSL
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: token_ssl
+        - name: TOKEN_ALGORITHM
+          valueFrom:
+            secretKeyRef:
+              name: blog
+              key: token_algorithm
 
 
 ---

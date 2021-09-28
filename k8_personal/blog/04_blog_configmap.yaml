@@ -6,3 +6,5 @@ data:
   # Blog
   flask_app: "main.py"
   flask_env: "production"
+  # API Blog
+  token_expiration: "30"
