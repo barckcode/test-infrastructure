@@ -33,7 +33,7 @@ services:
       - net_app
   api_blog_host:
     container_name: blog_api
-    image: barckcode/api_blog:v0.2
+    image: barckcode/api_blog:v0.3
     depends_on:
       - db_host
     command: uvicorn app:app --reload --host=0.0.0.0
