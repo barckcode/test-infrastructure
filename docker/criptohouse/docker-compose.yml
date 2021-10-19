@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  criptohouse_db:
+    container_name: criptohouse_db
+    image: postgres:13
+    env_file:
+      - ./db.env
+    environment:
+      - "POSTGRES_PASSWORD=${DB_PASSWORD}"
+    ports:
+      - 5432:5432
+    volumes:
+      - criptohouse_db:/var/lib/postgresql/data
+    networks:
+      - criptohouse_net
+  criptohouse_api:
+    container_name: criptohouse_api
+    build:
+      context: ../../../criptohouse/criptohouse_api
+      dockerfile: Dockerfile.local
+    depends_on:
+      - criptohouse_db
+    command: uvicorn app:app --reload --host=0.0.0.0
+    volumes:
+      - ../../../criptohouse/criptohouse_api/api:/api
+    env_file:
+      - ./api.env
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    ports:
+      - 8000:8000
+    networks:
+      - criptohouse_net
+
+volumes:
+  criptohouse_db:
+
+networks:
+  criptohouse_net:
