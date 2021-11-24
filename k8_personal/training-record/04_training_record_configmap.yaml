@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: training-record
+data:
+  # Training Record
+  flask_app: "main.py"
+  flask_env: "production"

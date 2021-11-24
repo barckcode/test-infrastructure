@@ -1,0 +1,86 @@
+#
+# Training Record
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: training-record
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: training-record
+  template:
+    metadata:
+      labels:
+        role: training-record
+    spec:
+      containers:
+      - name: training-record
+        image: barckcode/training_record_web:1.0
+        ports:
+        - containerPort: 5000
+        env:
+        # ConfigMap
+        - name: FLASK_APP
+          valueFrom:
+            configMapKeyRef:
+              name: training-record
+              key: flask_app
+        - name:  FLASK_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: training-record
+              key: flask_env
+        # SecretKey
+        - name: BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: training-record
+              key: bot_token
+
+
+---
+#
+# Training Record Bot
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: training-record-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: training-record-bot
+  template:
+    metadata:
+      labels:
+        role: training-record-bot
+    spec:
+      containers:
+      - name: training-record-bot
+        image: barckcode/training_record_bot:1.0
+        env:
+        # SecretKey
+        - name: TOKEN_BOT
+          valueFrom:
+            secretKeyRef:
+              name: training-record
+              key: bot_token
+
+
+---
+#
+# Training Record SVC
+###
+apiVersion: v1
+kind: Service
+metadata:
+  name: training-record
+spec:
+  ports:
+  - port:  80
+    targetPort:  5000
+  selector:
+    role: training-record
