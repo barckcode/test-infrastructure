@@ -126,3 +126,6 @@ images
 
 ### K8 ###
 k8_personal/**/*_secret.yaml
+
+### Logs ###
+*.log

@@ -11,17 +11,17 @@
 # nginx_vhosts          - Configure vhosts
 # ssh_rsa               - Copy SSH KEY RSA file
 # set_hostname          - Set a hostname
+# setup_bridges         - Setup Tor Bridges
 # system_users          - Config System Users
 ##########################################################################
 ######################## Hosts:
 #- hosts: sauron
-#- hosts: web01
+#- hosts: bridge01
 #- hosts: bbdd01
 ######################## Groups:
 #- hosts: global
 #- hosts: blog
-#- hosts: swarm
-#- hosts: web
+#- hosts: bridges
 #- hosts: bbdd
 
   tasks:
@@ -72,6 +72,10 @@
     - include: tasks/set_hostname.yml
       tags:
         - set_hostname
+
+    - include: tasks/setup_bridges.yml
+      tags:
+        - setup_bridges
 
     - include: tasks/system_users.yml
       tags:

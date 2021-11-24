@@ -87,9 +87,9 @@ resource "aws_security_group" "sauron_sg" {
 }
 
 
-# WEB
-resource "aws_security_group" "web_sg" {
-  name        = "web_sg"
+# Bridges
+resource "aws_security_group" "bridge_sg" {
+  name        = "bridge_sg"
   description = "Allow inbound traffic"
   vpc_id      = aws_vpc.main.id
 
@@ -101,36 +101,24 @@ resource "aws_security_group" "web_sg" {
     cidr_blocks = ["10.0.1.0/24"]
   }
 
-  # ingress {
-  #   description = "SSH from all"
-  #   from_port   = 22
-  #   to_port     = 22
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["0.0.0.0/0"]
-  # }
-
   ingress {
-    description = "HTTP"
-    from_port   = 80
-    to_port     = 80
+    description = "Tor ORPort"
+    from_port   = 8500
+    to_port     = 8500
     protocol    = "tcp"
-    security_groups  = [
-      "sg-0a5d2d3d4e96e8eba",
-    ]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description = "HTTPS"
-    from_port   = 443
-    to_port     = 443
+    description = "Tor obfs4"
+    from_port   = 8501
+    to_port     = 8501
     protocol    = "tcp"
-    security_groups  = [
-      "sg-0a5d2d3d4e96e8eba",
-    ]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
-    Name     = "web_sg"
+    Name     = "bridge_sg"
     Creation = "terraform"
   }
 }

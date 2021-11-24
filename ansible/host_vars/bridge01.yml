@@ -1,0 +1,14 @@
+#####
+# Hostname:
+#####
+hostname_server: bridge01
+
+
+#####
+# List of apt packages to install:
+#####
+list_additional_pkg:
+  - apt-transport-https
+  - deb.torproject.org-keyring
+  - tor
+  - obfs4proxy

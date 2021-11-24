@@ -1,0 +1,21 @@
+---
+# - name: Add Tor Repository
+#   apt_repository:
+#     repo: deb [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org stretch main
+#     state: present
+
+# - name: Add Tor SRC Repository
+#   apt_repository:
+#     repo: deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org stretch main
+#     state: present
+
+# - name: Add GPG Key
+#   shell: wget -O- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
+
+- name: Copy Tor Config
+  copy:
+    src: conf/bridges/tor/config/torrc
+    dest: /etc/tor/torrc
+    owner: root
+    group: root
+    mode: '0644'
