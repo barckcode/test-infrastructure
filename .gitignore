@@ -112,6 +112,9 @@ images
 *.tfstate
 *.tfstate.*
 
+# terraform files
+*.terraform.lock.hcl*
+
 
 ### Ansible ###
 **/private/**
