@@ -21,7 +21,7 @@ services:
       - db_host
     command: flask run --host=0.0.0.0
     volumes:
-      - ../../../app_blog/blog:/app
+      - ../../../blog/app_blog/blog:/app
     env_file:
       - ./app.env
     dns:
@@ -38,7 +38,7 @@ services:
       - db_host
     command: uvicorn app:app --reload --host=0.0.0.0
     volumes:
-      - ../../../api_blog/api:/api
+      - ../../../blog/api_blog/api:/api
     env_file:
       - ./api.env
     dns:
