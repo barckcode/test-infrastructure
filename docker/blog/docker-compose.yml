@@ -17,9 +17,12 @@ services:
   blog_host:
     container_name: blog_app
     image: barckcode/flask_blog:v1.3
+    # Test PROD image
+    #image: barckcode/flask_blog:2.3
     depends_on:
       - db_host
     command: flask run --host=0.0.0.0
+    # Comentar volumes cuando se vaya a testear la imagen de PROD
     volumes:
       - ../../../blog/app_blog/blog:/app
     env_file:
