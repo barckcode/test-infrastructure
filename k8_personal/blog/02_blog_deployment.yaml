@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: blog
-        image: barckcode/flask_blog:2.4
+        image: barckcode/flask_blog:2.5
         ports:
         - containerPort: 5000
         env:
