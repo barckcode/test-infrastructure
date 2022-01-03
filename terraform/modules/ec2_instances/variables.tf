@@ -1,29 +1,16 @@
-variable "ami_id" {
-  description = "AMI ID"
+variable "tipo_instancia" {
+  description = "Tipo de la instancia EC2"
   type        = string
+  default     = "t2.micro"
 }
 
-variable "instance_type" {
-  description = "Instance type"
-  type = string
-}
+variable "servidores" {
+  description = "Mapa de servidores con su correspondiente subnet publica"
 
-variable "subnet_id" {
-  description = "Subnet ID"
-  type        = string
-}
-
-variable "custom_private_ip" {
-  description = "Custom Private IP"
-  type        = string
-}
-
-variable "disk_size" {
-  description = "Disk Size"
-  type        = number
-}
-
-variable "tags_group" {
-  description = "Tags Group"
-  type = map(string)
+  type = map(object({
+      nombre    = string
+      subnet_id = string
+      ami_id    = string
+    })
+  )
 }

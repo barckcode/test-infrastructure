@@ -87,43 +87,6 @@ resource "aws_security_group" "sauron_sg" {
 }
 
 
-# Bridges
-resource "aws_security_group" "bridge_sg" {
-  name        = "bridge_sg"
-  description = "Allow inbound traffic"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    description = "SSH from VPC"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.1.0/24"]
-  }
-
-  ingress {
-    description = "Tor ORPort"
-    from_port   = 8500
-    to_port     = 8500
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "Tor obfs4"
-    from_port   = 8501
-    to_port     = 8501
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name     = "bridge_sg"
-    Creation = "terraform"
-  }
-}
-
-
 # MYSQL BBDD
 resource "aws_security_group" "mysql_sg" {
   name        = "mysql_sg"
