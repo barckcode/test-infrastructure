@@ -1,13 +1,20 @@
 # EC2 Instance
 resource "aws_instance" "servidor" {
-  for_each = var.servidores
+  for_each = var.instances
 
-  ami                    = each.value.ami_id
-  instance_type          = var.tipo_instancia
-  subnet_id              = each.value.subnet_id
+  ami             = each.value.ami_id
+  instance_type   = each.value.instance_type
+  subnet_id       = each.value.subnet_id
+  private_ip      = each.value.private_ip
+  key_name        = "ssh_key"
+
+  root_block_device {
+    volume_size = each.value.disk_size
+  }
 
   tags = {
-    Name = each.value.nombre
+    Name     = each.value.name
+    Creation = each.value.creation
   }
 }
 

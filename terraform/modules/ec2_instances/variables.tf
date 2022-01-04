@@ -1,16 +1,14 @@
-variable "tipo_instancia" {
-  description = "Tipo de la instancia EC2"
-  type        = string
-  default     = "t2.micro"
-}
-
-variable "servidores" {
-  description = "Mapa de servidores con su correspondiente subnet publica"
+variable "instances" {
+  description = "Mapa de servidores"
 
   type = map(object({
-      nombre    = string
-      subnet_id = string
-      ami_id    = string
+      name          = string
+      ami_id        = string
+      instance_type = string
+      private_ip    = string
+      disk_size     = number
+      subnet_id     = string
+      creation      = string
     })
   )
 }

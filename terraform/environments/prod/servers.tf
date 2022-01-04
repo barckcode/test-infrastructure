@@ -1,33 +1,3 @@
-# variable "servers" {
-#   description = "Servers Map"
-#   type = map(object({
-#       ami_id = string,
-#       custom_private_ip = string,
-#       disk_size = number,
-#       instance_type = string,
-#       name = string,
-#     })
-#   )
-
-#   default = {
-#     "bbdd01" = {
-#       ami_id = "ami-08f173bf94c7ac0a5"
-#       custom_private_ip = "10.0.1.111"
-#       disk_size = 30
-#       instance_type = "t3.micro"
-#       name = "bbdd01"
-#     },
-#     "sauron" = {
-#       ami_id = "ami-08f173bf94c7ac0a5"
-#       custom_private_ip = "10.0.1.11"
-#       disk_size = 30
-#       instance_type = "t3.micro"
-#       name = "sauron"
-#     }
-#   }
-# }
-
-
 # module "ec2_instances" {
 #   for_each = var.servers
 
@@ -48,41 +18,49 @@
 #   #depends_on_eip = aws_internet_gateway.main_internet_gw
 # }
 
-variable "servidores" {
-  description = "Mapa de servidores con su correspondiente AZ"
+variable "instances" {
+  description = "Mapa de servidores"
 
   type = map(object({
-      nombre = string
-      az     = string
-      ami_id = string
+      name          = string
+      ami_id        = string
+      instance_type = string
+      private_ip    = string
+      disk_size     = number
     })
   )
 
   default = {
     "sauron" = {
-      nombre = "sauron"
-      az = "a"
+      name = "sauron"
       ami_id = "ami-08f173bf94c7ac0a5"
+      instance_type = "t3.micro"
+      private_ip = "10.0.1.11"
+      disk_size = 30
     },
     "bbdd01" = {
-      nombre = "bbdd01"
-      az = "b"
+      name = "bbdd01"
       ami_id = "ami-08f173bf94c7ac0a5"
+      instance_type = "t3.micro"
+      private_ip = "10.0.1.111"
+      disk_size = 30
     },
   }
 }
 
-module "servidores_ec2" {
+module "instances_ec2" {
   source = "../../modules/ec2_instances"
 
-  tipo_instancia = "t2.micro"
-
-  servidores = {
-    for id_ser, datos in var.servidores :
-    id_ser => {
-      nombre = datos.nombre
-      subnet_id = aws_subnet.main_subnet_01.id
-      ami_id = datos.ami_id
+  instances = {
+    for instance, instance_data in var.instances :
+    instance => {
+      name          = instance_data.name
+      ami_id        = instance_data.ami_id
+      instance_type = instance_data.instance_type
+      private_ip    = instance_data.private_ip
+      disk_size     = instance_data.disk_size
+      subnet_id     = aws_subnet.main_subnet_01.id
+      creation      = local.terraform_tag
     }
   }
 }
