@@ -1,4 +1,4 @@
 output "instancia_ids" {
   description = "IDs de las instancias"
-  value       = [for servidor in aws_instance.servidor : servidor.id]
+  value       = [for server in aws_instance.server : server.id]
 }

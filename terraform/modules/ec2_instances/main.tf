@@ -1,5 +1,5 @@
 # EC2 Instance
-resource "aws_instance" "servidor" {
+resource "aws_instance" "server" {
   for_each = var.instances
 
   ami             = each.value.ami_id
@@ -20,15 +20,16 @@ resource "aws_instance" "servidor" {
 
 
 # Elastic IP
-# resource "aws_eip" "public_ips" {
-#   vpc = true
+resource "aws_eip" "public_ips" {
+  for_each = var.instances
 
-#   instance                  = var.id_instance_eip
-#   associate_with_private_ip = var.custom_private_ip
-#   depends_on                = [var.depends_on_eip]
+  vpc = true
+  instance                  = aws_instance.server[each.value.name].id
+  associate_with_private_ip = aws_instance.server[each.value.name].private_ip
+  depends_on                = [var.depends_on_eip]
 
-#   tags = {
-#     Name     = "${var.tags_group["name"]}_public_ip"
-# 		Creation = var.tags_group["creation"]
-#   }
-# }
+  tags = {
+    Name     = "${each.value.name}_public_ip"
+		Creation = each.value.creation
+  }
+}

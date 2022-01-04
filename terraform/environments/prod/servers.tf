@@ -63,4 +63,6 @@ module "instances_ec2" {
       creation      = local.terraform_tag
     }
   }
+
+  depends_on_eip = aws_internet_gateway.main_internet_gw
 }

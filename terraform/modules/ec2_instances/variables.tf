@@ -1,3 +1,4 @@
+# EC2 Instance
 variable "instances" {
   description = "Mapa de servidores"
 
@@ -11,4 +12,11 @@ variable "instances" {
       creation      = string
     })
   )
+}
+
+
+# Elastic IP
+variable "depends_on_eip" {
+  description = "Internet GW"
+  type        = any
 }
