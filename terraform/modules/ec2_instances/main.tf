@@ -33,3 +33,12 @@ resource "aws_eip" "public_ips" {
 		Creation = each.value.creation
   }
 }
+
+
+# Attached Segurity Groups
+resource "aws_network_interface_sg_attachment" "servers_sg_attachment" {
+  for_each = var.instances
+
+  security_group_id    = each.value.security_group_id
+  network_interface_id = aws_instance.server[each.value.name].primary_network_interface_id
+}
