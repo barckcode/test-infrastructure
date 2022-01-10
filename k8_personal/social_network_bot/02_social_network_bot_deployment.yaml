@@ -1,0 +1,28 @@
+---
+#
+# Training Record Bot
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: social-network-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: social-network-bot
+  template:
+    metadata:
+      labels:
+        role: social-network-bot
+    spec:
+      containers:
+      - name: social-network-bot
+        image: barckcode/social_network_bot:0.1
+        env:
+        # SecretKey
+        - name: DISCORD_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: social-network-bot
+              key: discord_token
